@@ -18,3 +18,28 @@ dbPath=home+'.todo'
 const p=require('path');
 const dbPath=p.join(home,'.todo');
 ```
+
+#### windows 命令
+* 打开 home 目录
+```
+start ~
+```
+
+#### 用 promise 封装 readFile
+```
+read: () => {
+    let list;
+    return new Promise((resolve, reject) => {
+        fs.readFile(dbPath, {flag: 'a+'}, (err, data) => {
+            if (err) {
+                reject(err);
+            }else{
+                resolve(list)
+            }
+        })
+    })
+}
+
+let list=await read();
+console.log(list);
+```
