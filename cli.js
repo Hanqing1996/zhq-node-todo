@@ -1,7 +1,7 @@
 const {program} = require('commander');
 
 
-const {add, clear,showAll} = require("./index")
+const {add, clear,showAll,inquireCommand} = require("./index")
 
 // program
 //     .option('-d, --debug', 'output extra debugging')
@@ -27,5 +27,12 @@ program
     .description('show all tasks')
     .action(()=>{
         showAll();
+    });
+
+program
+    .command('inquire')
+    .description('inquiretasks')
+    .action(()=>{
+        inquireCommand();
     });
 program.parse(process.argv);

@@ -6,6 +6,7 @@
   "author": "zhq <zhq199622@163.com>",
   "license": "MIT",
   "devDependencies": {
-    "commander": "^5.0.0"
+    "commander": "^5.0.0",
+    "inquirer": "^7.1.0"
   }
 }
