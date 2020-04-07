@@ -10,7 +10,7 @@ module.exports.db = {
         return new Promise((resolve, reject) => {
             fs.readFile(dbPath, {flag: 'a+'}, (err, data) => {
                 if (err) {
-                    reject(err);
+                    return reject(err);
                 }
                 try {
                     list = JSON.parse(data.toString());
@@ -23,9 +23,14 @@ module.exports.db = {
     },
     write: (list) => {
         const result = JSON.stringify(list)
-        fs.writeFile(dbPath, result, (err) => {
-            if (err) throw err;
-            console.log('The file has been saved!');
-        });
+        return new Promise((resolve, reject) => {
+            fs.writeFile(dbPath, result, (err) => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve()
+            });
+
+        })
     }
 }
