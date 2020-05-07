@@ -42,7 +42,7 @@ module.exports = {
                         {name:'delete the task',value:'-4'}]
                 }
             ])
-            .then(answers => {
+            .then(async answers => {
                 let {task:taskIndex,operation}=answers;
                 taskIndex=parseInt(taskIndex);
                 operation=parseInt(operation);
@@ -54,10 +54,13 @@ module.exports = {
                                 type: 'input',
                                 name: 'newTitle',
                                 message: "input new title"
-                            }).then(answers=>{
+                            }).then(async answers=>{
                                 const {newTitle}=answers;
                                 list[taskIndex]={...list[taskIndex],title:newTitle};
-                                db.write(list);
+                                let information=await db.write(list);
+                                if(information==='write successfully'){
+                                    console.log('edit title successfully');
+                                }
                         })
                         break;
                     case -3:
@@ -83,15 +86,23 @@ module.exports = {
 
                                     return true;
                                 }
-                            }).then(answers=>{
+                            }).then(async answers=>{
                                 const {status}=answers;
                                 list[taskIndex]={...list[taskIndex],done:status[0] === '已完成'};
-                                db.write(list);
+
+                                let information=await db.write(list);
+                                if(information==='write successfully'){
+                                    console.log('update state successfully');
+                                }
+
                         })
                         break;
                     case -4:
                         list.splice(taskIndex, 1);
-                        db.write(list);
+                        let information=await db.write(list);
+                        if(information==='write successfully'){
+                            console.log('delete task successfully');
+                        }
                         break;
                     default:
                         console.log('quit successfully');

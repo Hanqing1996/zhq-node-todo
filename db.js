@@ -28,7 +28,7 @@ module.exports.db = {
                 if (err) {
                     return reject(err);
                 }
-                resolve()
+                resolve('write successfully')
             });
 
         })
