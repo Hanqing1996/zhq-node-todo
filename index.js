@@ -39,7 +39,7 @@ module.exports = {
                         {name:'quit',value:'-1'},
                         {name:'edit title',value:'-2'},
                         {name:'update state',value:'-3'},
-                        {name:'delete',value:'-4'}]
+                        {name:'delete the task',value:'-4'}]
                 }
             ])
             .then(answers => {
@@ -90,7 +90,8 @@ module.exports = {
                         })
                         break;
                     case -4:
-                        console.log('你想删除任务');
+                        list.splice(taskIndex, 1);
+                        db.write(list);
                         break;
                     default:
                         console.log('quit successfully');
