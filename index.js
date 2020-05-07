@@ -29,8 +29,23 @@ module.exports = {
                     type: 'list',
                     name: 'task',
                     message: 'Choose the task you want to edit',
-                    choices: list.map(item=>item.title)
+                    choices: list.map((item,index)=>{
+                        return {name:item.title,value:index.toString()}
+                    })
                 },
+                {
+                    type: 'list',
+                    name: 'operation',
+                    message: 'Choose the operation you want to execute',
+                    choices: [
+                        {name:'quit',value:'-1'},
+                        {name:'edit title',value:'-2'},
+                        {name:'choose state',value:'-3'},
+                        {name:'delete',value:'-4'}]
+                },
+
+
+                /*
                 {
                     type: 'checkbox',
                     message: 'Select state',
@@ -53,10 +68,35 @@ module.exports = {
                         return true;
                     }
                 }
+                */
             ])
             .then(answers => {
-                console.log(answers);
-                console.log(JSON.stringify(answers, null, '  '));
+                let {task:taskIndex,operation}=answers;
+                taskIndex=parseInt(taskIndex);
+                operation=parseInt(operation);
+
+                switch (operation) {
+                    case -2:
+                        inquirer
+                            .prompt(  {
+                                type: 'input',
+                                name: 'newTitle',
+                                message: "input new title"
+                            }).then(answers=>{
+                                const {newTitle}=answers;
+                                list[taskIndex]={...list[taskIndex],title:newTitle};
+                                db.write(list);
+                        })
+                        break;
+                    case -3:
+                        console.log('你想修改状态');
+                        break;
+                    case -4:
+                        console.log('你想删除任务');
+                        break;
+                    default:
+                        console.log('quit successfully');
+                }
             });
     }
 }
