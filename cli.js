@@ -12,14 +12,14 @@ program
     .command('add')
     .description('add a new task')
     .action((...args) => {
-        add(args[1].join(" ")).then(()=>{console.log('添加成功');},()=>{console.log('添加失败')});
+        add(args[1].join(" ")).then(()=>{console.log('add successfully');},()=>{console.log('add failed')});
     });
 
 program
     .command('clear')
     .description('clear tasks')
     .action(()=>{
-        clear().then(()=>{console.log('清除完毕');},()=>{console.log('清除失败');});
+        clear().then(()=>{console.log('clear successfully');},()=>{console.log('clear failed');});
     });
 
 program
