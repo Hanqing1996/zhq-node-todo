@@ -31,7 +31,7 @@ program
 
 program
     .command('inquire')
-    .description('inquiretasks')
+    .description('inquire tasks')
     .action(()=>{
         inquireCommand();
     });

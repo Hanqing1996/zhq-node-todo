@@ -55,9 +55,9 @@ module.exports = {
                 }
             ])
             .then(answers => {
+                console.log(answers);
                 console.log(JSON.stringify(answers, null, '  '));
             });
-
     }
 }
 
